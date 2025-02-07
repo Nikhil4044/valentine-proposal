@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .container {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 90%;
+            margin: 20px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin: 10px;
+        }
+        
+        #yesBtn {
+            background-color: #ff69b4;
+            color: white;
+        }
+        
+        #noBtn {
+            background-color: #808080;
+            color: white;
+            position: relative;
+        }
+        
+        @keyframes shake {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(-8px, 8px); }
+            50% { transform: translate(8px, -8px); }
+            75% { transform: translate(-8px, -8px); }
+            100% { transform: translate(0, 0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Will You Be My Valentine? ❤️</h1>
+        <div class="buttons">
+            <button id="yesBtn" onclick="showLovePage()">Yes!</button>
+            <button id="noBtn" onclick="moveButton(this)">No</button>
+        </div>
+    </div>
+
+    <script>
+        // Set initial background image when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.style.backgroundImage = "url('images/proposal-bg.jpg')";
+            const noBtn = document.getElementById('noBtn');
+            noBtn.style.position = 'relative';
+            noBtn.style.left = '0';
+            noBtn.style.top = '0';
+        });
+
+        function moveButton(button) {
+            const container = document.querySelector('body');
+            const containerRect = container.getBoundingClientRect();
+            
+            const maxX = containerRect.width - button.offsetWidth - 20;
+            const maxY = containerRect.height - button.offsetHeight - 20;
+            
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+            
+            button.style.position = 'absolute';
+            button.style.left = x + 'px';
+            button.style.top = y + 'px';
+            
+            button.style.animation = 'shake 0.5s ease';
+            setTimeout(() => {
+                button.style.animation = '';
+            }, 500);
+            
+            return false;
+        }
+
+        function showLovePage() {
+            document.body.innerHTML = `
+                <div class="container">
+                    <h1>I Love You! ❤️</h1>
+                    <p style="font-size: 1.5rem;">Thank you for making me the happiest person!</p>
+                </div>
+            `;
+            document.body.style.backgroundImage = "url('images/success-bg.jpg')";
+        }
+    </script>
+</body>
+</html>
